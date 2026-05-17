@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0\">
+    <title>The Little Prince: Multiverse Endings</title>
+    <style>
+        
+        /* ============================================
+           ROOT VARIABLES & GLOBAL STYLES
+           ============================================ */
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-light: #ffffff;
+            --accent-gold: #d4a574;
+            --accent-sand: #f4e4c1;
+            --deep-blue: #0f1628;
+            --forest-green: #1a3a2a;
+            --rose-pink: #d4a3a3;
+            --warm-orange: #e8a76f;
+            --soft-yellow: #f5e6d3;
+
+            --transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.3s ease-out;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700;900&family=Press+Start+2P&family=VT323&family=Montserrat:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body { image-rendering: pixelated; }
+
+        body {
+            font-family: 'Crimson Text', 'Georgia', serif;
+            color: var(--primary-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            background: #0b0a13;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           PIXEL HERO HEADER (replaces navbar)
+           ============================================ */
+        .pixel-hero {
+            position: relative;
+            width: 100%;
+            height: 92vh;
+            min-height: 620px;
+            overflow: hidden;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            /* Sunset/dusk pixel sky in 6 hard bands */
+            background:
+                linear-gradient(
+                    to bottom,
+                    #2b1d4a 0%, #2b1d4a 14%,
+                    #5b2e6e 14%, #5b2e6e 26%,
+                    #a04475 26%, #a04475 40%,
+                    #e07a5f 40%, #e07a5f 54%,
+                    #f2cc8f 54%, #f2cc8f 66%,
+                    #c79866 66%, #c79866 76%,
+                    #6b4a3a 76%, #6b4a3a 100%
+                );
+        }
+
+        /* Stars (pixel dots) */
+        .pixel-hero .stars {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(2px 2px at 12% 8%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 22% 4%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 34% 11%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 48% 6%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 62% 9%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 74% 3%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 84% 12%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 92% 6%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 6% 14%, #fff 50%, transparent 51%),
+                radial-gradient(2px 2px at 56% 16%, #fff 50%, transparent 51%);
+            animation: twinkleStars 4s steps(2) infinite;
+        }
+
+        /* Pixel moon */
+        .pixel-hero .moon {
+            position: absolute;
+            top: 7%;
+            right: 9%;
+            width: 64px; height: 64px;
+            background: #fff7d6;
+            box-shadow:
+                -8px 0 0 #fff7d6, -16px 0 0 #fff7d6,
+                8px 0 0 #fff7d6, 16px 0 0 #fff7d6,
+                0 -8px 0 #fff7d6, 0 -16px 0 #fff7d6,
+                0 8px 0 #fff7d6, 0 16px 0 #fff7d6,
+                -16px -8px 0 #fff7d6, 16px -8px 0 #fff7d6,
+                -16px 8px 0 #fff7d6, 16px 8px 0 #fff7d6,
+                -8px -16px 0 #fff7d6, 8px -16px 0 #fff7d6,
+                -8px 16px 0 #fff7d6, 8px 16px 0 #fff7d6,
+                /* craters */
+                -8px -4px 0 #e9dfb7, 4px 8px 0 #e9dfb7;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 18px rgba(255,247,214,0.5));
+        }
+
+        /* Distant mountains - blocky bands */
+        .pixel-hero .mountains {
+            position: absolute;
+            left: 0; right: 0;
+            bottom: 18%;
+            height: 28%;
+            background:
+                linear-gradient(to bottom, transparent 0%, transparent 30%, #3a2a4a 30%, #3a2a4a 100%);
+            -webkit-mask-image:
+                linear-gradient(135deg, transparent 49%, #000 50%),
+                linear-gradient(225deg, transparent 49%, #000 50%);
+            mask-image:
+                linear-gradient(135deg, transparent 49%, #000 50%),
+                linear-gradient(225deg, transparent 49%, #000 50%);
+            -webkit-mask-position: 0 0, 0 0;
+            mask-position: 0 0, 0 0;
+            -webkit-mask-size: 220px 100%, 220px 100%;
+            mask-size: 220px 100%, 220px 100%;
+            -webkit-mask-repeat: repeat-x;
+            mask-repeat: repeat-x;
+            opacity: 0.8;
+        }
+
+        /* Castle - built from pixel blocks */
+        .pixel-hero .castle {
+            position: absolute;
+            left: 50%;
+            bottom: 18%;
+            transform: translateX(-50%);
+            width: 400px; height: 460px;
+            filter: drop-shadow(0 0 12px rgba(0,0,0,0.4));
+        }
+        .pixel-hero .castle .body {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            bottom: 0; width: 240px; height: 150px;
+            background: #2c2238;
+            box-shadow:
+                inset 0 -8px 0 #1a1424,
+                inset 0 8px 0 #3d2f4a;
+        }
+        .pixel-hero .castle .tower {
+            position: absolute; bottom: 0;
+            width:80px; height: 230px;
+            background: #2c2238;
+            box-shadow: inset -4px 0 0 #1a1424, inset 4px 0 0 #3d2f4a;
+        }
+        .pixel-hero .castle .tower.left { left: 0; }
+        .pixel-hero .castle .tower.right { right: 0; }
+        .pixel-hero .castle .tower.center {
+            left: 50%; transform: translateX(-50%);
+            width: 88px; height: 350px;
+        }
+        .pixel-hero .castle .crenel {
+            position: absolute; top: 0; width: 100%;
+            height: 48px;
+            background:
+                linear-gradient(to right, #2c2238 0 25%, transparent 25% 50%, #2c2238 50% 75%, transparent 75% 100%);
+        }
+        .pixel-hero .castle .roof {
+            position: absolute;
+            width: 0; height: 0;
+            top: -16px; left: 50%; transform: translateX(-50%);
+            border-left: 28px solid transparent;
+            border-right: 28px solid transparent;
+            border-bottom: 24px solid #8b1e3f;
+        }
+        .pixel-hero .castle .tower.center .roof {
+            border-left-width:  32px; border-right-width: 32px; border-bottom-width: 28px;
+            top: -20px;
+        }
+        .pixel-hero .castle .flag {
+            position: absolute;
+            top: -36px; left: calc(50% + 1px);
+            width: 2px; height: 16px;
+            background: #d9c7a3;
+        }
+        .pixel-hero .castle .flag::after {
+            content: ''; position: absolute;
+            top: 0; left: 2px;
+            width: 12px; height: 8px;
+            background: #d4a574;
+            animation: flagWave 1.2s steps(2) infinite;
+        }
+        .pixel-hero .castle .window {
+            position: absolute;
+            width: 20px; height: 22px;
+            background: #f6c971;
+            box-shadow: 0 0 6px rgba(246,201,113,0.8);
+        }
+        .pixel-hero .castle .window.w1 { top: 30px; left: 14px; }
+        .pixel-hero .castle .window.w2 { top: 30px; right: 14px; }
+        .pixel-hero .castle .window.w3 { top: 60px; left: 50%; transform: translateX(-50%); }
+        .pixel-hero .castle .gate {
+            position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 22px; height: 32px;
+            background: #1a1018;
+            border-radius: 11px 11px 0 0;
+        }
+
+        /* Pixel forest line */
+        .pixel-hero .forest {
+            position: absolute;
+            left: 0; right: 0;
+            bottom: 18%;
+            height: 18%;
+            display: flex;
+            align-items: flex-end;
+            gap: 0;
+            justify-content: space-between;
+            padding: 0 0;
+            z-index: 3;
+        }
+        .pixel-tree {
+            position: relative;
+            width: 38px; height: 78px;
+            flex-shrink: 0;
+        }
+        .pixel-tree .trunk {
+            position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 6px; height: 18px;
+            background: #4a2c1a;
+        }
+        .pixel-tree .canopy {
+            position: absolute;
+            bottom: 14px; left: 50%; transform: translateX(-50%);
+            width: 30px; height: 30px;
+            background: #1f5132;
+            box-shadow:
+                0 -10px 0 -3px #1f5132,
+                0 -20px 0 -7px #1f5132,
+                -10px -6px 0 -3px #1f5132,
+                10px -6px 0 -3px #1f5132,
+                inset 0 -4px 0 #163d25,
+                inset 4px 0 0 #2a6b43;
+        }
+        .pixel-tree.small { width: 26px; height: 56px; }
+        .pixel-tree.small .canopy { width: 22px; height: 22px; }
+        .pixel-tree.tall { height: 96px; }
+        .pixel-tree.tall .canopy { width: 36px; height: 36px; background: #173f25; }
+
+        /* Ground (front grass strip) */
+        .pixel-hero .ground {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 18%;
+            background:
+                linear-gradient(to bottom,
+                    #2a6b43 0%, #2a6b43 14%,
+                    #1f5132 14%, #1f5132 36%,
+                    #4a3826 36%, #4a3826 60%,
+                    #3a2c1f 60%, #3a2c1f 100%);
+        }
+        .pixel-hero .ground::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 6px;
+            background-image:
+                linear-gradient(to right,
+                    #2a6b43 0 6px, transparent 6px 14px,
+                    #2a6b43 14px 18px, transparent 18px 26px);
+            background-size: 26px 100%;
+        }
+
+        /* Pixel Little Prince */
+        .pixel-prince {
+            position: absolute;
+            bottom: 16%;
+            left: 18%;
+            width: 56px; height: 96px;
+            z-index: 4;
+            animation: princeBob 1.6s steps(2) infinite;
+        }
+        .pixel-prince .head {
+            position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+            width: 22px; height: 22px;
+            background: #f4d3a8;
+            box-shadow: inset -2px 0 0 #d9b07f, inset 2px 0 0 #ffe2bd;
+        }
+        .pixel-prince .hair {
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            width: 26px; height: 14px;
+            background: #f5c84b;
+            box-shadow: inset 0 -2px 0 #c89a2a, inset 0 2px 0 #ffe07a;
+        }
+        .pixel-prince .hair::before, .pixel-prince .hair::after {
+            content: '';
+            position: absolute; top: -4px;
+            width: 4px; height: 6px; background: #f5c84b;
+        }
+        .pixel-prince .hair::before { left: 4px; }
+        .pixel-prince .hair::after { right: 4px; }
+        .pixel-prince .eye {
+            position: absolute; top: 28px;
+            width: 2px; height: 4px; background: #1a1a1a;
+        }
+        .pixel-prince .eye.l { left: 18px; }
+        .pixel-prince .eye.r { right: 18px; }
+        .pixel-prince .scarf {
+            position: absolute; top: 38px; left: 50%; transform: translateX(-50%);
+            width: 24px; height: 6px; background: #e63946;
+            animation: scarfWave 1.4s steps(2) infinite;
+        }
+        .pixel-prince .body {
+            position: absolute; top: 42px; left: 50%; transform: translateX(-50%);
+            width: 26px; height: 32px;
+            background: #2e7d32;
+            box-shadow: inset -2px 0 0 #1b5e20, inset 2px 0 0 #4caf50;
+        }
+        .pixel-prince .belt {
+            position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+            width: 26px; height: 4px; background: #d4a574;
+        }
+        .pixel-prince .leg {
+            position: absolute; top: 74px;
+            width: 8px; height: 16px; background: #1a3a5a;
+        }
+        .pixel-prince .leg.l { left: 18px; }
+        .pixel-prince .leg.r { right: 18px; }
+        .pixel-prince .boot {
+            position: absolute; top: 88px;
+            width: 10px; height: 6px; background: #2a1a10;
+        }
+        .pixel-prince .boot.l { left: 17px; }
+        .pixel-prince .boot.r { right: 17px; }
+
+        /* Title overlay */
+        .hero-title-wrap {
+            position: absolute;
+            top: 22%;
+            left: 0; right: 0;
+            text-align: center;
+            z-index: 5;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+        .hero-title-eyebrow {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: #ffe07a;
+            text-shadow: 2px 2px 0 #2b1d4a, 4px 4px 0 rgba(0,0,0,0.4);
+            margin-bottom: 1.4rem;
+        }
+        .hero-title {
+            font-family: 'Press Start 2P', monospace;
+            color: #fff8dc;
+            line-height: 1.4;
+            font-size: clamp(5.4rem, 4.2vw, 3.2rem);
+            letter-spacing: 2px;
+            text-shadow:
+                3px 3px 0 #8b1e3f,
+                6px 6px 0 #2b1d4a,
+                9px 9px 0 rgba(0,0,0,0.45);
+        }
+        .hero-title .accent {
+            color: #f5c84b;
+            display: block;
+            margin-top: 0.6rem;
+            font-size: 0.78em;
+        }
+        .hero-subtitle {
+            margin-top: 1.6rem;
+            font-family: 'VT323', monospace;
+            color: #ffe2bd;
+            font-size: clamp(1rem, 1.8vw, 1.4rem);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Bottom fade so carousel blends */
+        .pixel-hero::after {
+            content: '';
+            position: absolute; left: 0; right: 0; bottom: 0; height: 60px;
+            background: linear-gradient(to bottom, transparent, #0b0a13);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* ============================================
+           PLANETS CAROUSEL
+           ============================================ */
+        .carousel-section {
+            position: relative;
+            width: 100%;
+            padding: 4rem 1rem 6rem;
+            background:
+                radial-gradient(ellipse at 50% 0%, #1a1530 0%, #0b0a13 70%);
+            color: #fff;
+            overflow: hidden;
+        }
+        .carousel-section::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 30% 80%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 50% 30%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 70% 60%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 90% 25%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 20% 50%, #fff 50%, transparent 51%),
+                radial-gradient(1px 1px at 80% 85%, #fff 50%, transparent 51%);
+            opacity: 0.5;
+            animation: twinkleStars 5s steps(2) infinite;
+            pointer-events: none;
+        }
+        .carousel-heading {
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            color: #f5c84b;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.6rem;
+            text-shadow: 2px 2px 0 #2b1d4a;
+            position: relative; z-index: 2;
+        }
+        .carousel-sub {
+            text-align: center;
+            color: #c9b9d8;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            position: relative; z-index: 2;
+        }
+
+        .coverflow {
+            position: relative;
+            height: 360px;
+            max-width: 1100px;
+            margin: 0 auto;
+            perspective: 1400px;
+            user-select: none;
+            cursor: grab;
+            z-index: 2;
+        }
+        .coverflow.dragging { cursor: grabbing; }
+
+        .planet-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 320px;
+            height: 320px;
+            transform: translate(-50%, -50%);
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.45s ease, filter 0.45s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            text-align: center;
+        }
+        .planet-card.active { z-index: 5; }
+        .planet-card .planet {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            position: relative;
+            image-rendering: pixelated;
+            box-shadow:
+                inset -16px -16px 0 rgba(0,0,0,0.35),
+                inset 16px 16px 0 rgba(255,255,255,0.08),
+                0 0 30px rgba(245,200,75,0.15);
+            transition: transform 0.4s ease;
+        }
+        .planet-card.active .planet {
+            animation: planetSpin 14s steps(20) infinite;
+            box-shadow:
+                inset -16px -16px 0 rgba(0,0,0,0.35),
+                inset 16px 16px 0 rgba(255,255,255,0.1),
+                0 0 60px rgba(245,200,75,0.45),
+                0 0 120px rgba(245,200,75,0.18);
+        }
+        .planet-card .planet::after {
+            /* shine */
+            content: '';
+            position: absolute; top: 12px; left: 16px;
+            width: 30px; height: 14px;
+            background: rgba(255,255,255,0.35);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+        .planet-card .label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            color: #f5c84b;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #2b1d4a;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .planet-card .desc {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: #d8cfe8;
+            max-width: 240px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .planet-card.active .label,
+        .planet-card.active .desc { opacity: 1; }
+
+        /* Unique pixel planets per universe */
+        /* 1. Solitary Return - fading earth */
+        .planet.p1 {
+            background:
+                radial-gradient(circle at 30% 30%, #6cc56e 0 14%, transparent 15%),
+                radial-gradient(circle at 65% 60%, #4ea25a 0 18%, transparent 19%),
+                radial-gradient(circle at 70% 25%, #5fb066 0 10%, transparent 11%),
+                radial-gradient(circle at 25% 70%, #4ea25a 0 12%, transparent 13%),
+                linear-gradient(180deg, #2d6cb1 0%, #1f4f86 100%);
+            filter: saturate(0.85) brightness(0.95);
+        }
+        .planet.p1::before {
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 60%, rgba(255,255,255,0.12) 65%, transparent 70%);
+            animation: fadePulse 4s steps(4) infinite;
+        }
+
+        /* 2. Crowned Star Collapse - fragmented golden */
+        .planet.p2 {
+            background:
+                conic-gradient(from 45deg,
+                    #f5c84b 0 12%, #ffe07a 12% 25%, #f5c84b 25% 38%,
+                    #c89a2a 38% 50%, #f5c84b 50% 62%, #ffe07a 62% 75%,
+                    #f5c84b 75% 88%, #c89a2a 88% 100%);
+            box-shadow:
+                inset -16px -16px 0 rgba(0,0,0,0.25),
+                inset 16px 16px 0 rgba(255,255,255,0.18),
+                0 0 60px rgba(245,200,75,0.6);
+        }
+        .planet.p2::before {
+            /* fragments rays */
+            content: ''; position: absolute; inset: -22px;
+            background:
+                conic-gradient(from 0deg,
+                    transparent 0 8%, rgba(245,200,75,0.5) 8% 10%, transparent 10% 23%,
+                    rgba(245,200,75,0.4) 23% 25%, transparent 25% 48%,
+                    rgba(245,200,75,0.5) 48% 50%, transparent 50% 73%,
+                    rgba(245,200,75,0.4) 73% 75%, transparent 75% 100%);
+            border-radius: 50%;
+            animation: spin 18s linear infinite;
+            z-index: -1;
+        }
+
+        /* 3. Earthbound Monarch - continents wandering */
+        .planet.p3 {
+            background:
+                radial-gradient(circle at 22% 28%, #8b6f3a 0 16%, transparent 17%),
+                radial-gradient(circle at 60% 35%, #6b5026 0 12%, transparent 13%),
+                radial-gradient(circle at 40% 70%, #8b6f3a 0 20%, transparent 21%),
+                radial-gradient(circle at 75% 75%, #6b5026 0 10%, transparent 11%),
+                linear-gradient(180deg, #2c5d8a 0%, #1d4368 100%);
+        }
+
+        /* 4. Silent Rose Reversal - rose-linked */
+        .planet.p4 {
+            background:
+                radial-gradient(circle at 50% 50%, #ffd1d1 0 6%, transparent 7%),
+                radial-gradient(circle at 50% 50%, #e8909a 0 12%, transparent 13%),
+                radial-gradient(circle at 30% 30%, #c25868 0 10%, transparent 11%),
+                radial-gradient(circle at 70% 70%, #c25868 0 10%, transparent 11%),
+                radial-gradient(circle at 70% 30%, #b04050 0 8%, transparent 9%),
+                radial-gradient(circle at 30% 70%, #b04050 0 8%, transparent 9%),
+                linear-gradient(180deg, #d9697a 0%, #8b2e3f 100%);
+        }
+        .planet.p4::before {
+            content: ''; position: absolute;
+            top: -6px; left: 50%; transform: translateX(-50%);
+            width: 10px; height: 16px;
+            background: #2e7d32;
+            border-radius: 2px 2px 50% 50%;
+        }
+
+        /* 5. Broken Desert Loop - sandy with rings/loop */
+        .planet.p5 {
+            background:
+                repeating-linear-gradient(45deg,
+                    #d4a574 0 8px,
+                    #c4925f 8px 16px,
+                    #b8855a 16px 24px),
+                radial-gradient(circle, #e8c098 0%, #b8855a 100%);
+            background-blend-mode: multiply;
+        }
+        .planet.p5::before {
+            content: ''; position: absolute;
+            inset: -28px -50px;
+            border-radius: 50%;
+            background: transparent;
+            border: 6px solid #f5c84b;
+            border-color: rgba(245,200,75,0.7) transparent rgba(245,200,75,0.4) transparent;
+            transform: rotate(-18deg);
+            animation: spin 12s linear infinite;
+        }
+        .planet.p5::after {
+            content: ''; position: absolute;
+            inset: -14px -38px;
+            border-radius: 50%;
+            border: 3px dashed rgba(255,247,214,0.5);
+            transform: rotate(-18deg);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+            position: relative; z-index: 2;
+        }
+        .carousel-dots .dot {
+            width: 14px; height: 14px;
+            background: #4a3a6a;
+            border: 2px solid #2b1d4a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .carousel-dots .dot.active {
+            background: #f5c84b;
+            border-color: #f5c84b;
+            transform: scale(1.2);
+            box-shadow: 0 0 12px rgba(245,200,75,0.7);
+        }
+
+        .carousel-cta {
+            text-align: center;
+            margin-top: 2rem;
+            position: relative; z-index: 2;
+        }
+        .carousel-cta button {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            padding: 1rem 1.6rem;
+            background: #f5c84b;
+            color: #2b1d4a;
+            border: 4px solid #2b1d4a;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #2b1d4a;
+            transition: transform 0.15s steps(2), box-shadow 0.15s;
+        }
+        .carousel-cta button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #2b1d4a;
+        }
+        .carousel-cta button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0 0 0 #2b1d4a;
+        }
+
+        /* ============================================
+           PAGE TRANSITIONS (preserved)
+           ============================================ */
+        .page-container {
+            position: relative;
+            width: 100%;
+        }
+        .page {
+            display: none;
+            width: 100%;
+        }
+        .page.active { display: block; animation: fadeInPage 0.6s ease; }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           UNIVERSE PAGE STYLES (preserved)
+           ============================================ */
+        .universe-page {
+            position: relative;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+        }
+        .universe-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        .universe-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+        .universe-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .story-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .story-section:nth-child(1) { animation-delay: 0.2s; }
+        .story-section:nth-child(2) { animation-delay: 0.4s; }
+        .story-section:nth-child(3) { animation-delay: 0.6s; }
+        .story-section:nth-child(4) { animation-delay: 0.8s; }
+        .story-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            opacity: 0.6;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--accent-gold);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--accent-gold);
+            transition: left var(--transition-fast);
+            z-index: -1;
+        }
+        .btn:hover { color: var(--primary-dark); }
+        .btn:hover::before { left: 0; }
+        .btn.primary {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border-color: var(--accent-gold);
+        }
+        .btn.primary::before { display: none; }
+        .btn.primary:hover { background: transparent; color: var(--accent-gold); }
+
+        /* Universe 1 */
+        .universe-1-page {
+            background: linear-gradient(180deg, #fff5e6 0%, #ffe8cc 50%, #ffd9a8 100%);
+            position: relative; overflow: hidden;
+        }
+        .universe-1-page::before {
+            content: ''; position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(232, 167, 111, 0.2) 0%, transparent 70%);
+            border-radius: 50%; top: -200px; right: -200px;
+            animation: float 30s ease-in-out infinite;
+        }
+        .universe-1-page::after {
+            content: ''; position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(245, 230, 211, 0.3) 0%, transparent 70%);
+            border-radius: 50%; bottom: -100px; left: 50px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        .universe-1-page .story-section {
+            background: rgba(255,255,255,0.4);
+            border: 1px solid rgba(232, 167, 111, 0.2);
+        }
+
+        /* Universe 2 */
+        .universe-2-page {
+            background: linear-gradient(180deg, #1a0a2e 0%, #2b1d4a 50%, #0f0820 100%);
+            color: #f6e9d8;
+            position: relative; overflow: hidden;
+        }
+        .universe-2-page::before {
+            content: ''; position: absolute;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(245,200,75,0.18) 0%, transparent 70%);
+            border-radius: 50%; top: 10%; right: -15%;
+            animation: float 28s ease-in-out infinite;
+        }
+        .universe-2-page .story-section {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(245,200,75,0.25);
+            color: #f6e9d8;
+        }
+        .universe-2-page .story-label, .universe-2-page .universe-number { color: #f5c84b; opacity: 0.85; }
+
+        /* Universe 3 */
+        .universe-3-page {
+            background: linear-gradient(135deg, #f4e4c1 0%, #ebe0d0 50%, #ddd5c4 100%);
+            position: relative; overflow: hidden;
+            filter: sepia(0.15);
+        }
+        .universe-3-page .story-section {
+            background: rgba(255,255,255,0.25);
+            border: 1px solid rgba(212,165,116,0.3);
+        }
+
+        /* Universe 4 */
+        .universe-4-page {
+            background: linear-gradient(180deg, #2a0a18 0%, #4d1428 50%, #1a0610 100%);
+            color: rgba(255,255,255,0.92);
+            position: relative; overflow: hidden;
+        }
+        .universe-4-page::before {
+            content: ''; position: absolute;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(217,105,122,0.2) 0%, transparent 70%);
+            border-radius: 50%; top: 20%; left: 10%;
+            animation: float 25s ease-in-out infinite;
+        }
+        .universe-4-page .story-section {
+            background: rgba(217,105,122,0.08);
+            border: 1px solid rgba(217,105,122,0.25);
+            color: rgba(255,255,255,0.92);
+        }
+        .universe-4-page .story-label, .universe-4-page .universe-number { color: #ffb3bf; }
+
+        /* Universe 5 */
+        .universe-5-page {
+            background: linear-gradient(180deg, #f4e4c1 0%, #d4a574 50%, #8b6f3a 100%);
+            color: #2a1a10;
+            position: relative; overflow: hidden;
+        }
+        .universe-5-page::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                repeating-linear-gradient(45deg, transparent 0 20px, rgba(0,0,0,0.04) 20px 22px);
+            pointer-events: none;
+        }
+        .universe-5-page .story-section {
+            background: rgba(255,255,255,0.3);
+            border: 1px solid rgba(139,111,58,0.4);
+        }
+
+        /* Climax */
+        .climax-page {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f1628 50%, #050505 100%);
+            color: #ffffff;
+            position: relative; overflow: hidden;
+        }
+        .climax-page::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 90px 10px, #eee, transparent);
+            background-repeat: repeat; background-size: 200px 200px;
+            animation: twinkleStars 5s ease-in-out infinite; opacity: 0.8;
+        }
+        .climax-page .story-section {
+            background: rgba(212,165,116,0.05);
+            border: 1px solid rgba(212,165,116,0.2);
+            color: rgba(255,255,255,0.95);
+        }
+
+        .home-link-bar {
+            text-align: center;
+            padding: 1.6rem 1rem 0;
+            background: #0b0a13;
+        }
+        .home-link-bar button {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            padding: 0.8rem 1.2rem;
+            background: transparent;
+            color: #f5c84b;
+            border: 3px solid #f5c84b;
+            cursor: pointer;
+        }
+        .home-link-bar button:hover {
+            background: #f5c84b;
+            color: #2b1d4a;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes twinkleStars {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        @keyframes flagWave {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(0.7); }
+        }
+        @keyframes scarfWave {
+            0%, 100% { transform: translateX(-50%) scaleX(1); }
+            50% { transform: translateX(-50%) scaleX(0.85) translateY(1px); }
+        }
+        @keyframes princeBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes planetSpin {
+            from { background-position: 0% 50%; }
+            to { background-position: 200% 50%; }
+        }
+        @keyframes fadePulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0,0); }
+            25% { transform: translate(20px,-20px); }
+            50% { transform: translate(-10px,-40px); }
+            75% { transform: translate(30px,-20px); }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .pixel-hero { height: 78vh; min-height: 520px; }
+            .pixel-hero .castle { width: 160px; height: 120px; }
+            .pixel-prince { left: 8%; bottom: 14%; }
+            .coverflow { height: 320px; }
+            .planet-card { width: 180px; height: 180px; }
+            .planet-card .planet { width: 140px; height: 140px; }
+            .universe-page { padding: 2rem 1rem; }
+            .story-section { padding: 1.5rem; }
+            .action-buttons { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-title-wrap { top: 18%; }
+            .pixel-hero .castle { width: 130px; height: 100px; }
+            .pixel-tree { width: 28px; height: 60px; }
+            .pixel-tree.tall { height: 78px; }
+            .planet-card .label { font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- ========================================
+             PIXEL HERO HEADER (replaces navbar)
+             ======================================== -->
+        <header class="pixel-hero" data-testid="pixel-hero">
+            <div class="stars" aria-hidden="true"></div>
+            <div class="moon" aria-hidden="true"></div>
+            <div class="mountains" aria-hidden="true"></div>
+
+            <!-- Castle -->
+            <div class="castle" aria-hidden="true">
+                <div class="tower left">
+                    <div class="crenel"></div>
+                </div>
+                <div class="tower right">
+                    <div class="crenel"></div>
+                </div>
+                <div class="body">
+                    <div class="crenel"></div>
+                    <div class="window w1"></div>
+                    <div class="window w2"></div>
+                    <div class="gate"></div>
+                </div>
+                <div class="tower center">
+                    <div class="roof"></div>
+                    <div class="flag"></div>
+                    <div class="window w3"></div>
+                </div>
+            </div>
+
+            <!-- Title overlay -->
+            <div class="hero-title-wrap">
+                <div class="hero-title-eyebrow">A PIXEL TALE</div>
+                <h1 class="hero-title">
+                    THE LITTLE PRINCE
+                    <span class="accent">~ MULTIVERSE ENDINGS ~</span>
+                </h1>
+                <div class="hero-subtitle">Five Worlds · One Climax · Infinite Possibilities</div>
+            </div>
+
+            <!-- Forest -->
+            <div class="forest" aria-hidden="true">
+                <div class="pixel-tree small"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree tall"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree small"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree tall"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree small"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree tall"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree small"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree tall"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree"><div class="canopy"></div><div class="trunk"></div></div>
+                <div class="pixel-tree small"><div class="canopy"></div><div class="trunk"></div></div>
+            </div>
+
+            <!-- Pixel Prince -->
+            <div class="pixel-prince" aria-hidden="true" data-testid="pixel-prince">
+                <div class="hair"></div>
+                <div class="head"></div>
+                <div class="eye l"></div>
+                <div class="eye r"></div>
+                <div class="scarf"></div>
+                <div class="body"></div>
+                <div class="belt"></div>
+                <div class="leg l"></div>
+                <div class="leg r"></div>
+                <div class="boot l"></div>
+                <div class="boot r"></div>
+            </div>
+
+            <div class="ground" aria-hidden="true"></div>
+        </header>
+
+        <!-- ========================================
+             PLANETS CAROUSEL
+             ======================================== -->
+        <section class="carousel-section" id="planets" data-testid="planets-carousel">
+            <h2 class="carousel-heading">CHOOSE YOUR UNIVERSE</h2>
+            <div class="carousel-sub">Drag · Swipe · Click to enter</div>
+
+            <div class="coverflow" id="coverflow" data-testid="coverflow">
+                <div class="planet-card" data-index="0" data-target="universe-1" data-testid="planet-1">
+                    <div class="planet p1"></div>
+                    <div class="label">I · The Little Prince: Main Story</div>
+                    <div class="desc">He stays. The well becomes a landmark. He fades from human memory.</div>
+                </div>
+                <div class="planet-card" data-index="1" data-target="universe-2" data-testid="planet-2">
+                    <div class="planet p2"></div>
+                    <div class="label">II · Eternal Wanderer: No Home Across the Stars</div>
+                    <div class="desc">Reaches a crowded cluster of planets after hundreds of aimless stops.</div>
+                </div>
+                <div class="planet-card" data-index="2" data-target="universe-3" data-testid="planet-3">
+                    <div class="planet p3"></div>
+                    <div class="label">III · The Rose That Forgot to Wait</div>
+                    <div class="desc">Loving something that no longer stays</div>
+                </div>
+                <div class="planet-card" data-index="3" data-target="universe-4" data-testid="planet-4">
+                    <div class="planet p4"></div>
+                    <div class="label">IV · The Planet of Infinite Roses</div>
+                    <div class="desc">What was never unique still becomes irreplaceable through time shared</div>
+                </div>
+                <div class="planet-card" data-index="4" data-target="universe-5" data-testid="planet-5">
+                    <div class="planet p5"></div>
+                    <div class="label">V · The Planet of Almost Goodbyes</div>
+                    <div class="desc">When staying feels harder than leaving.</div>
+                </div>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots" data-testid="carousel-dots"></div>
+
+            <div class="carousel-cta">
+                <button id="enterUniverseBtn" data-testid="enter-universe-btn">ENTER UNIVERSE ▶</button>
+            </div>
+        </section>
+
+        <!-- ========================================
+             PAGES (preserved)
+             ======================================== -->
+        <div class="page-container">
+
+            <!-- CLIMAX PAGE -->
+            <div class="page climax-page" id="climax">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">The Creators Choice</div>
+                            <h2>Infinite Universe of the Little Prince</h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Group Members</div>
+                            <p>Raynaldo Jandog <br>
+                                Mary Angel Benig Leocadio <br>
+                                Mark Paningbatan <br>
+                                Caleb Quinones <br>
+                                Razel Santos 
+                            </p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn primary" onclick="navigateTo('universe-1')">Universe I</button>
+                            <button class="btn primary" onclick="navigateTo('universe-2')">Universe II</button>
+                            <button class="btn primary" onclick="navigateTo('universe-3')">Universe III</button>
+                            <button class="btn primary" onclick="navigateTo('universe-4')">Universe IV</button>
+                            <button class="btn primary" onclick="navigateTo('universe-5')">Universe V</button>
+                            <button class="btn" onclick="navigateTo('home')">Return Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSE 1 -->
+            <div class="page universe-1-page" id="universe-1">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">Universe I · The Little Prince</div>
+                            <h2></h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">The Climax</div>
+                            <p>The Little Prince realizes his rose is not unique in the universe in a physical sense, after seeing a garden of similar roses on Earth. He feels deep sadness and confusion because this challenges what he believed about her importance.
+
+He meets a fox who explains that true value comes from bonds built through time, care, and responsibility. The fox teaches that what matters is created through attention and connection, not appearance or ownership.
+
+The Prince understands that his rose is unique to him because of the relationship he built with her and the time he spent caring for her. He decides he must return to his planet to take responsibility for her again.
+
+He accepts the snake’s offer to leave Earth, allowing the possibility of returning to his world in a non-physical form. The pilot loses sight of him afterward and believes he has gone back to the stars.</p>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Outcome</div>
+                            <p>After the realization about the rose and the fox’s lesson on bonds, the Prince chooses responsibility over wandering. He decides to return to his asteroid B-612 to care for his rose.
+
+He meets the snake again. The snake offers a way to leave Earth. The Prince accepts this choice. The story presents it as his departure from the physical world, with the idea that his spirit returns to the stars and his home planet.
+
+The pilot later finds no body. He concludes the Prince has gone back to his planet. The desert journey ends, and the pilot leaves with lasting memory and change in perspective.
+
+The outcome centers on return, responsibility, and acceptance of separation.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="navigateTo('home')">Home</button>
+                            <button class="btn" onclick="navigateTo('climax')">Group Members</button>
+                            <button class="btn" onclick="navigateTo('universe-2')">Next Universe →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSE 2 -->
+            <div class="page universe-2-page" id="universe-2">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">Universe II · Eternal Wanderer: No Home Across the Stars</div>
+                            <h2>He Leaves Immediately</h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Climax</div>
+                            <p>The Prince reaches a crowded cluster of planets after hundreds of aimless stops. He sees familiar patterns again. Kings with empty authority. Adults repeating habits without meaning. Systems built on control, possession, or avoidance.
+
+He begins to feel a break in his usual pattern. The emptiness he keeps outrunning becomes harder to ignore. On one quiet planet, he meets a traveler who does not act like the others. The traveler observes him for a long time, then speaks directly.
+
+“Running from what hurts means you never learn.”
+
+The statement disrupts the Prince’s pattern of immediate departure. For a brief moment, he does not leave. He stands still long enough to feel the weight of every planet he abandoned, every unanswered question, every skipped reflection.
+
+That pause becomes the peak of his journey.</p>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Outcome</div>
+                            <p>The Prince still chooses motion over return.
+
+He leaves the planet without resolving what he feels. The difference now is awareness without change. He understands the cycle he is in, but he does not break it.
+
+He continues traveling across hundreds of planets. The universe expands for him, but home never forms. Each stop becomes shorter. Each departure becomes easier. The pattern becomes permanent.
+
+He turns into the eternal wanderer.
+
+A figure known across distant systems. Always arriving, never staying. Always near meaning, never holding it. The rose remains in memory, but no longer as a place to return to, only as something carried while moving endlessly through the stars.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="navigateTo('home')">Home</button>
+                            <button class="btn" onclick="navigateTo('climax')">Group Members</button>
+                            <button class="btn" onclick="navigateTo('universe-3')">Next Universe →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSE 3 -->
+            <div class="page universe-3-page" id="universe-3">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">Universe III · The Rose That Forgot to Wait</div>
+                            <h2>Loving something that no longer stays.</h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Climax</div>
+                            <p>The Little Prince arrives on a dim planet where a single rose garden once thrived. The flowers are now fading. A caretaker robot still tends them out of habit, repeating routines long after the garden stopped responding.
+
+The Prince searches for meaning in the silence. He realizes the garden is dying not from neglect, but from absence of shared time. No one stayed long enough to matter to it anymore.
+
+He recalls his own rose on B-612. He understands she never feared thorns, she feared being left without attention.</p>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Outcome</div>
+                            <p> He returns emotionally to his rose without physically reaching her. The memory of care becomes his only connection.
+
+The garden planet is left behind with its robot continuing empty routines. The Prince carries forward one understanding. Love without presence slowly turns into memory without shape.
+
+Title: The Rose That Forgot to Wait
+Subtitle: Loving something that no longer stays</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="navigateTo('home')">Home</button>
+                            <button class="btn" onclick="navigateTo('climax')">Group Members</button>
+                            <button class="btn" onclick="navigateTo('universe-4')">Next Universe →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSE 4 -->
+            <div class="page universe-4-page" id="universe-4">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">Universe IV · The Planet of Infinite Roses</div>
+                            <h2>What was never unique still becomes irreplaceable through time shared</h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Climax</div>
+                            <p>The Little Prince lands on a glowing unknown planet. The surface is covered with millions of roses. They stretch across valleys, hills, and skies reflected in luminous petals.
+
+At first, he freezes. He recognizes them immediately. They look identical to his rose on B-612. The meaning he once gave her starts to collapse in his mind.
+
+He asks the roses why they exist in so many numbers. They respond with calm certainty. Nothing about appearance creates importance. Time shared creates importance. Attention creates importance. Care creates importance. They explain that identity forms through connection, not duplication.
+
+The Prince feels two conflicting reactions at the same time. Relief that his rose is not alone. And betrayal that she was never physically unique.
+
+The emotional peak arrives here. He faces the loss of the idea that uniqueness comes from appearance, while still holding the memory of emotional attachment.</p>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Outcome</div>
+                            <p>The Prince does not return to B-612.
+
+He leaves the glowing planet with a changed understanding. His rose remains important, not because she is rare, but because of the shared history he refuses to erase.
+
+He begins traveling again, but his movement changes. He no longer searches for uniqueness. He searches for connection formed over time.
+
+He carries the lesson from the millions of roses into every place he visits. Meaning depends on relationship, not origin.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="navigateTo('home')">Home</button>
+                            <button class="btn" onclick="navigateTo('climax')">Group Members</button>
+                            <button class="btn" onclick="navigateTo('universe-5')">Next Universe →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSE 5 -->
+            <div class="page universe-5-page" id="universe-5">
+                <div class="universe-page">
+                    <div class="universe-content">
+                        <div class="universe-header">
+                            <div class="universe-number">Universe V · The Planet of Almost Goodbyes</div>
+                            <h2>When staying feels harder than leaving</h2>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Climax</div>
+                            <p>The Prince lands on a planet where people live in constant near-departures. Every bond is temporary. Friends, families, even cities are treated as stops before leaving.
+
+He meets a boy who plans to leave every relationship before it can hurt. The boy believes distance prevents pain.
+
+The Prince recognizes himself in this behavior from earlier journeys. He sees how he avoided pain by leaving planets quickly.</p>
+                        </div>
+                        <div class="story-section">
+                            <div class="story-label">Outcome</div>
+                            <p>The Prince stays on the planet longer than usual. He does not fix it. He does not escape it.
+
+He learns that leaving early does not prevent loss. It only removes the chance for anything to matter.
+
+He departs, but slower. He carries the realization that avoidance creates emptiness that feels safer but lasts longer.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="navigateTo('home')">Home</button>
+                            <button class="btn" onclick="navigateTo('climax')">Group Members</button>
+                            <button class="btn" onclick="navigateTo('universe-1')">Return to Universe I</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="home-link-bar">
+            <button onclick="navigateTo('home')" data-testid="home-link">▲ BACK TO MULTIVERSE</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // NAVIGATION (preserved behavior)
+        // ============================================
+        const pages = ['home', 'climax', 'universe-1', 'universe-2', 'universe-3', 'universe-4', 'universe-5'];
+        let currentPage = 'home';
+
+        function navigateTo(pageName) {
+            if (!pages.includes(pageName)) return;
+
+            const allPages = document.querySelectorAll('.page');
+            allPages.forEach(p => p.classList.remove('active'));
+
+            const hero = document.querySelector('.pixel-hero');
+            const carousel = document.querySelector('.carousel-section');
+            const homeBar = document.querySelector('.home-link-bar');
+
+            if (pageName === 'home') {
+                hero.style.display = '';
+                carousel.style.display = '';
+                homeBar.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                hero.style.display = 'none';
+                carousel.style.display = 'none';
+                homeBar.style.display = '';
+                const target = document.getElementById(pageName);
+                if (target) target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            currentPage = pageName;
+        }
+
+        // ============================================
+        // COVERFLOW CAROUSEL
+        // ============================================
+        const coverflow = document.getElementById('coverflow');
+        const cards = Array.from(coverflow.querySelectorAll('.planet-card'));
+        const dotsContainer = document.getElementById('carouselDots');
+        const enterBtn = document.getElementById('enterUniverseBtn');
+        let activeIndex = 0;
+
+        // Build dots
+        cards.forEach((_, i) => {
+            const d = document.createElement('div');
+            d.className = 'dot';
+            d.dataset.index = i;
+            d.setAttribute('data-testid', `carousel-dot-${i}`);
+            d.addEventListener('click', () => setActive(i));
+            dotsContainer.appendChild(d);
+        });
+
+        function layout() {
+            cards.forEach((card, i) => {
+                const offset = i - activeIndex;
+                const abs = Math.abs(offset);
+                const translateX = offset * 180;
+                const rotateY = offset * -22;
+                const scale = abs === 0 ? 1 : abs === 1 ? 0.78 : 0.55;
+                const opacity = abs > 2 ? 0 : abs === 0 ? 1 : abs === 1 ? 0.75 : 0.35;
+                const z = 5 - abs;
+                const blur = abs === 0 ? 0 : abs === 1 ? 1 : 2;
+
+                card.style.transform = `translate(-50%, -50%) translateX(${translateX}px) rotateY(${rotateY}deg) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = z;
+                card.style.filter = `blur(${blur}px)`;
+                card.classList.toggle('active', i === activeIndex);
+                card.style.pointerEvents = abs > 1 ? 'none' : 'auto';
+            });
+
+            dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === activeIndex);
+            });
+
+            enterBtn.textContent = `ENTER UNIVERSE ${['I','II','III','IV','V'][activeIndex]} ▶`;
+        }
+
+        function setActive(i) {
+            activeIndex = Math.max(0, Math.min(cards.length - 1, i));
+            layout();
+        }
+
+        // Click on planet card
+        cards.forEach((card, i) => {
+            card.addEventListener('click', (e) => {
+                if (i !== activeIndex) {
+                    setActive(i);
+                } else {
+                    const target = card.dataset.target;
+                    if (target) navigateTo(target);
+                }
+            });
+        });
+
+        // Enter button
+        enterBtn.addEventListener('click', () => {
+            const card = cards[activeIndex];
+            const target = card.dataset.target;
+            if (target) navigateTo(target);
+        });
+
+        // Drag / swipe - improved for better detection
+        let isDragging = false, startX = 0, deltaX = 0;
+        const DRAG_THRESHOLD = 40; // More sensitive
+
+        coverflow.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            deltaX = 0;
+            coverflow.classList.add('dragging');
+            coverflow.setPointerCapture(e.pointerId);
+        });
+
+        coverflow.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            deltaX = e.clientX - startX;
+        });
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            coverflow.classList.remove('dragging');
+            if (Math.abs(deltaX) > DRAG_THRESHOLD) {
+                if (deltaX < 0) setActive(activeIndex + 1);
+                else setActive(activeIndex - 1);
+            }
+            deltaX = 0;
+        }
+
+        coverflow.addEventListener('pointerup', endDrag);
+        coverflow.addEventListener('pointercancel', endDrag);
+        coverflow.addEventListener('pointerleave', endDrag);
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (currentPage !== 'home') {
+                const idx = pages.indexOf(currentPage);
+                if (e.key === 'ArrowRight' && idx < pages.length - 1) navigateTo(pages[idx + 1]);
+                else if (e.key === 'ArrowLeft' && idx > 0) navigateTo(pages[idx - 1]);
+                else if (e.key === 'Home' || e.key === 'Escape') navigateTo('home');
+                return;
+            }
+            if (e.key === 'ArrowRight') setActive(activeIndex + 1);
+            else if (e.key === 'ArrowLeft') setActive(activeIndex - 1);
+            else if (e.key === 'Enter') {
+                const card = cards[activeIndex];
+                if (card.dataset.target) navigateTo(card.dataset.target);
+            }
+        });
+
+        // Init
+        document.querySelector('.home-link-bar').style.display = 'none';
+        layout();
+    </script>
+</body>
+</html>
